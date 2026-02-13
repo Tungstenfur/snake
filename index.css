@@ -1,0 +1,19 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial';
+}
+.flex{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    min-height: 100vh;
+}
+canvas{
+    border: 1px solid black;
+    fill: cyan;
+    height: 50%;
+    width: 50%;
+    image-rendering: pixelated;
+}
