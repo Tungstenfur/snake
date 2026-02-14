@@ -1,15 +1,23 @@
 //Animacje
 document.addEventListener('DOMContentLoaded', () => {
+    const audio = new Audio('assets/typing.wav');
+    audio.volume = 0.2;
+    audio.playbackRate=1.5;
+    const startAudio = () => {
+        audio.play().catch(() => {});
+        window.removeEventListener('pointerdown', startAudio);
+        window.removeEventListener('keydown', startAudio);
+        window.removeEventListener('touchstart', startAudio);
+    };
+    window.addEventListener('pointerdown', startAudio);
+    window.addEventListener('keydown', startAudio);
+    window.addEventListener('touchstart', startAudio);
     const elements = Array.from(document.querySelectorAll('[data-typing]'));
-    const lineElements = Array.from(document.querySelectorAll('[data-line-typing]'));
+
     const fullTexts = elements.map((element) => element.textContent.trim());
 
     for (const element of elements) {
         element.textContent = '';
-    }
-
-    for (const element of lineElements) {
-        element.classList.add('line-typing');
     }
 
     const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -33,19 +41,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    const showLineElement = async (element, delay = 500) => {
-        await sleep(delay);
-        element.classList.add('is-visible');
-    };
+    
 
     (async () => {
         for (let index = 0; index < elements.length; index++) {
             await typeElement(elements[index], fullTexts[index]);
         }
-
-        for (const lineElement of lineElements) {
-            await showLineElement(lineElement);
-        }
+        audio.pause();
         await sleep(1000);
         if (window.location.pathname.endsWith('loading-anim.html')) {
             window.location.href = 'game.html';

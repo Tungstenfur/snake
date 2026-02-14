@@ -5,7 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="index.css">
-    <script src="intro.js" defer></script>
+    <script>
+        const lineElements = Array.from(document.querySelectorAll('[data-line-typing]'));
+        for (const element of lineElements) 
+        {
+            element.classList.add('line-typing');
+        }
+        const showLineElement = async (element, delay = 500) => 
+        {
+            await sleep(delay);
+            element.classList.add('is-visible');
+        };
+        for (const lineElement of lineElements) {
+            await showLineElement(lineElement);
+        }
+    </script>
 </head>
 <body>
     <p data-line-typing>WĄSZ OS v3.2</p>

@@ -17,8 +17,19 @@ document.addEventListener('DOMContentLoaded', function() {
     draw.rect(0,0,1,1);
     drawArea();
     spawnApple();
-    initSnake(glowa.x, glowa.y);
-
+    initWasz(glowa.x, glowa.y);
+    const appleEffect = new Audio('assets/apple.wav');
+    appleEffect.volume = 0.5;
+    const audio = new Audio('assets/main.mp3');
+    const startAudio = () => {
+        audio.play().catch(() => {});
+        window.removeEventListener('pointerdown', startAudio);
+        window.removeEventListener('keydown', startAudio);
+        window.removeEventListener('touchstart', startAudio);
+    };
+    window.addEventListener('pointerdown', startAudio);
+    window.addEventListener('keydown', startAudio);
+    window.addEventListener('touchstart', startAudio);
     //Rysowanie planszy
     function drawArea()
     {
@@ -62,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Inicjalizacja węszaa na planszy
-    function initSnake(startX, startY) {
+    function initWasz(startX, startY) {
         snake = [{ x: startX, y: startY }];
         area[startX][startY] = 2;
     }
@@ -89,6 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Oblicz nowe położenie głowy
             let nextHeadX = glowa.x;
             let nextHeadY = glowa.y;
+            // Zapobiegaj cofnięciu się węsza
             let moveDirection = direction;
             if (
                 (direction === 'w' && lastDirection === 's') ||
@@ -128,6 +140,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 punkty++;
                 punktyCounter.textContent = punkty;
                 spawnApple();
+                appleEffect.play()
             }
 
             // Rusz węsza
@@ -139,6 +152,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             drawArea();
         } catch (error) {
+            // Nie najlepszy sposób na wykrycie wyjścia poza zakres tablicy, ale ify mi nie chciały działać
             window.location.href = 'lost.html';
         }
     }, 200);
