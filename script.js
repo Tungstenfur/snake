@@ -3,7 +3,9 @@ document.addEventListener('DOMContentLoaded', function() {
     let direction = 'w';
     let glowa = { x: 10, y: 10 };
     let snake = [];
-
+    let lastDirection = 'w';
+    let punkty = 0;
+    const punktyCounter = document.getElementById('score');
     /*
     0 - puste
     1 - jabko 
@@ -87,7 +89,19 @@ document.addEventListener('DOMContentLoaded', function() {
             // Oblicz nowe położenie głowy
             let nextHeadX = glowa.x;
             let nextHeadY = glowa.y;
-            switch (direction) {
+            let moveDirection = direction;
+            if (
+                (direction === 'w' && lastDirection === 's') ||
+                (direction === 's' && lastDirection === 'w') ||
+                (direction === 'a' && lastDirection === 'd') ||
+                (direction === 'd' && lastDirection === 'a')
+            ) {
+                if (snake.length > 1) {
+                    moveDirection = lastDirection;
+                }
+            }
+
+            switch (moveDirection) {
                 case 'w':
                     nextHeadX--;
                     break;
@@ -101,6 +115,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     nextHeadY++;
                     break;
             }
+            lastDirection = moveDirection;
 
             // Bardzo długi warunek do zabijania węsza
             if (nextHeadX < 0 || nextHeadX >= area.length || nextHeadY < 0 || nextHeadY >= area[0].length || area[nextHeadX][nextHeadY] >= 2) {
@@ -110,6 +125,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const ateFood = area[nextHeadX][nextHeadY] === 1;
             if (ateFood) {
+                punkty++;
+                punktyCounter.textContent = punkty;
                 spawnApple();
             }
 
@@ -141,59 +158,5 @@ document.addEventListener('DOMContentLoaded', function() {
             spawnApple();
         }
         
-    }
-    function checkField()
-    {   
-        try        {
-            area[glowa.x][glowa.y];
-        }
-        catch(error)
-        {
-            window.location.href = 'lost.html';
-        }
-        if(area[glowa.x][glowa.y] === 0)
-        {
-            return;
-        }
-        else if (glowa.x < 0 || glowa.x >= area[0].length || glowa.y < 0 || glowa.y >= area.length) 
-        {
-            window.location.href = 'lost.html';
-        }
-        else if(area[glowa.x][glowa.y] === 1)
-        {
-            spawnApple();
-            //Zwiększenie stopnia węsza
-            for(let i = 0; i < area.length; i++)
-            {
-                for(let j = 0; j < area[i].length; j++)
-                {
-                    if(area[i][j] >= 2)
-                    {
-                       area[i][j]++;
-                    }
-                }
-            }
-            //Dodanie nowego segmentu węsza
-            switch(direction)
-            {
-                case 'w':
-                    area[glowa.x + 1][glowa.y] = 3;
-                    break;
-                case 'a':
-                    area[glowa.x][glowa.y + 1] = 3;
-                    break;
-                case 's':
-                    area[glowa.x - 1][glowa.y] = 3;
-                    break;
-                case 'd':
-                    area[glowa.x][glowa.y - 1] = 3;
-                    break;
-            }
-        }
-        else if(area[glowa.x][glowa.y] >= 2)
-        {
-            window.location.href = 'lost.html';
-        }
-
     }
 });

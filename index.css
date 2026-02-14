@@ -51,7 +51,6 @@ html::after {
     color: #8b8;
 }
 canvas{
-    border: 1px solid black;
     image-rendering: pixelated;
     filter: blur(1.5px);
 }
