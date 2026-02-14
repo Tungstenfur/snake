@@ -5,10 +5,10 @@ document.addEventListener('DOMContentLoaded', function() {
     let snake = [];
 
     /*
-    0 - puste - cyan
-    1 - jabko - red
-    2 - głowa węsza - lime
-    3+ - ciało węsza - green
+    0 - puste
+    1 - jabko 
+    2 - głowa węsza 
+    3+ - ciało węsza
     */
     const canvas = document.getElementById('snakeArea');
     const draw = canvas.getContext('2d');
@@ -27,16 +27,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 switch(area[i][j])
                 {
                     case 0:
-                        draw.fillStyle = 'cyan';
+                        draw.fillStyle = '#08110b';
                         break;
                     case 1:
-                        draw.fillStyle = 'red';
+                        draw.fillStyle = '#d6ffbf';
                         break;
                     case 2:
-                        draw.fillStyle = 'lime';
+                        draw.fillStyle = '#b7ff8a';
                         break;
                     default:
-                        draw.fillStyle = 'green';
+                        draw.fillStyle = '#79e06a';
                         break;
                 }
                 draw.fillRect(j, i, 1, 1);

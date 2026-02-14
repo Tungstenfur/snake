@@ -1,8 +1,37 @@
 body{
     margin: 0;
     padding: 0;
+
     font-family: 'Arial';
+    transform: perspective(1000px) scale(1.02);
 }
+html::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+    z-index: 9999;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center,transparent 60%,rgba(0,0,0,0.6) 100%);
+  width: 100%;
+  height: 100%;
+}
+html::after {
+  content: "";
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+    z-index: 9999;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.25) 0px,
+    rgba(0,0,0,0.25) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+    width: 100%;
+    height: 100%;
+}
+
 .flex{
     display: flex;
     align-items: center;
@@ -10,10 +39,101 @@ body{
     flex-direction: column;
     min-height: 100vh;
 }
+#apple{
+    width: 1.5em;
+    height: 1.5em;
+    margin-bottom: 1em;
+    filter: saturate(200%);
+}
 canvas{
     border: 1px solid black;
     fill: cyan;
-    height: 50%;
-    width: 50%;
     image-rendering: pixelated;
+}
+.crt-wrap {
+position: relative;
+width: min(50vw, 50vh);
+height: min(50vw, 50vh);
+box-sizing: border-box;
+}
+
+.crt-canvas {
+display: block;
+width: 100%;
+height: 100%;
+}
+.crt-wrap::before{
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0) 0px,
+        rgba(0, 0, 0, 0) 2px,
+        rgba(0, 0, 0, 0.24) 3px,
+        rgba(0, 0, 0, 0.24) 4px
+    );
+    mix-blend-mode: multiply;
+    animation: crtFlicker 100ms steps(2) infinite;
+}
+.crt-wrap::after{
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(circle at center, rgba(0, 0, 0, 0) 45%, rgba(0, 0, 0, 0.35) 100%);
+}
+.typing-text{
+    font-weight: bold;
+    white-space: pre-line;
+}
+.line-typing{
+    opacity: 0;
+    transform: translateY(2px);
+}
+.line-typing.is-visible{
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 120ms linear, transform 120ms ease-out;
+}
+#title{
+    text-align: center;
+}
+a{
+    color: #aaf;
+    text-decoration: none;
+    font-size: 1.5em;
+    margin-top: 1em;
+}
+html 
+{ 
+    background: #111;
+    padding: 1em;
+    font-family: Noto Sans Display;
+    color: #eee;
+    font-size: 1em;
+    line-height: 1;
+    text-shadow: 0.06rem 0 0.06rem #ea36af, -0.125rem 0 0.06rem #75fa69;
+    letter-spacing: 0.125em;
+    animation-duration: 0.01s;
+    animation-name: textflicker;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+@keyframes textflicker {
+    from {
+      text-shadow: 1px 0 0 #ea36af, -2px 0 0 #75fa69;
+    }
+    to {
+      text-shadow: 2px 0.5px 2px #ea36af, -1px -0.5px 2px #75fa69;
+    }
+}
+@keyframes crtFlicker {
+        from {
+                opacity: 0.86;
+        }
+        to {
+                opacity: 1;
+        }
 }
