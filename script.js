@@ -18,9 +18,11 @@ document.addEventListener('DOMContentLoaded', function() {
     drawArea();
     spawnApple();
     initWasz(glowa.x, glowa.y);
-    const appleEffect = new Audio('assets/apple.wav');
-    appleEffect.volume = 0.5;
-    const audio = new Audio('assets/main.mp3');
+    const appleEffect = new Audio('assets/apple.mp3');
+    appleEffect.volume = 0.8;
+    const audio = new Audio('assets/8-Bit_Katyusha.mp3');
+    audio.volume = 0.4;
+    audio.loop = true;
     const startAudio = () => {
         audio.play().catch(() => {});
         window.removeEventListener('pointerdown', startAudio);

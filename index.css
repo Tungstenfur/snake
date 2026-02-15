@@ -76,7 +76,7 @@ canvas{
 .line-typing.is-visible{
     opacity: 1;
     transform: translateY(0);
-    transition: opacity 120ms linear, transform 120ms ease-out;
+    transition: opacity 20ms linear, transform 20ms ease-out;
 }
 a{
     color: #8b8;

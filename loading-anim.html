@@ -6,33 +6,56 @@
     <title>Document</title>
     <link rel="stylesheet" href="index.css">
     <script>
-        const lineElements = Array.from(document.querySelectorAll('[data-line-typing]'));
-        for (const element of lineElements) 
-        {
-            element.classList.add('line-typing');
-        }
-        const showLineElement = async (element, delay = 500) => 
-        {
-            await sleep(delay);
-            element.classList.add('is-visible');
+        let audio = new Audio('assets/casette.wav');
+        const startAudio = () => {
+            audio.play().catch(() => {});
+            window.removeEventListener('pointerdown', startAudio);
+            window.removeEventListener('keydown', startAudio);
+            window.removeEventListener('touchstart', startAudio);
         };
-        for (const lineElement of lineElements) {
-            await showLineElement(lineElement);
-        }
+        window.addEventListener('pointerdown', startAudio);
+        window.addEventListener('keydown', startAudio);
+        window.addEventListener('touchstart', startAudio);
+        document.addEventListener('DOMContentLoaded', async () => {
+            const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+            const lineElements = Array.from(document.querySelectorAll('[data-line-typing]'));
+
+            for (const element of lineElements) {
+                element.classList.add('line-typing');
+            }
+
+            const showLineElement = async (element) => {
+                await sleep(Math.random() * 800+200);
+                element.classList.add('is-visible');
+            };
+
+            for (const lineElement of lineElements) {
+                await showLineElement(lineElement);
+            }
+            await sleep(1000);
+            window.location.href = 'game.html';
+        });
+    </script>
     </script>
 </head>
 <body>
-    <p data-line-typing>WĄSZ OS v3.2</p>
-    <p data-line-typing>Testing hardware:</p>
-    <p data-line-typing>CPU: OK</p>
-    <p data-line-typing>RAM: OK</p>
-    <p data-line-typing>GPU: OK</p>
-    <p data-line-typing>STORAGE: OK</p>
-    <p data-line-typing>NETWORK: OK</p>
-    <p data-line-typing>All hardware components are working properly.</p>
-    <p data-line-typing>Loading WĄSZ OS...</p>
-    <p data-line-typing>Connecting to WĄSZ 5363 on 258.142.53.63:55</p>
-    <p data-line-typing>Connection established.</p>
-    <p data-line-typing>Loading WĄSZ the game...</p>
+    <p data-line-typing>READING ROM</p>
+    <p data-line-typing>SYSINIT.SYS</p>
+    <p data-line-typing>KERNEL.SYS</p>
+    <p data-line-typing>DRVTERM.SYS</p>
+    <p data-line-typing>SPOOL.DAT</p>
+    <p data-line-typing>DOSTUP.TBL</p>
+    <p data-line-typing>SUCCES</p>
+    <p data-line-typing>AUTHENTICATING AS USR_IVANOV</p>
+    <p data-line-typing>SUCCES</p>
+    <p data-line-typing>CASETTE</p>
+    <p data-line-typing>WASZ.DAT</p>
+    <p data-line-typing>WASZ.SYS</p>
+    <p data-line-typing>AUTH.TBL</p>
+    <p data-line-typing>WASZ_GUI.SYS</p>
+    <p data-line-typing>CONNECT.TBL</p>
+    <p data-line-typing>SUCCES</p>
+    <p data-line-typing>RUNNING WASZ.SYS</p>
 </body>
 </html>
