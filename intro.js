@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const audio = new Audio('assets/typing.wav');
     audio.volume = 0.2;
     audio.playbackRate=1.5;
+    audio.loop = true;
     const startAudio = () => {
         audio.play().catch(() => {});
         window.removeEventListener('pointerdown', startAudio);
