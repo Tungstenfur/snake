@@ -146,8 +146,13 @@ document.addEventListener('DOMContentLoaded', function() {
             lastDirection = moveDirection;
 
             // Bardzo długi warunek do zabijania węsza
-            if (nextHeadX < 0 || nextHeadX >= area.length || nextHeadY < 0 || nextHeadY >= area[0].length || area[nextHeadX][nextHeadY] >= 2) {
-                window.location.href = 'lost.html';
+            if (nextHeadX < 0 || nextHeadX >= area.length || nextHeadY < 0 || nextHeadY >= area[0].length) {
+                killWasz(1);
+                return;
+            }
+            else if(area[nextHeadX][nextHeadY] >= 2)
+            {
+                killWasz(0);
                 return;
             }
 
@@ -169,7 +174,7 @@ document.addEventListener('DOMContentLoaded', function() {
             drawArea();
         } catch (error) {
             // Nie najlepszy sposób na wykrycie wyjścia poza zakres tablicy, ale ify mi nie chciały działać
-            window.location.href = 'lost.html';
+            killWasz(1);
         }
     }
     //Spawnowanie jabłka
@@ -201,5 +206,13 @@ document.addEventListener('DOMContentLoaded', function() {
             pauseText.style.display = 'none';
             canvas.style.opacity = '1';
         }
+    }
+    function killWasz(deathType)
+    {
+        if(punkty > storageData.hscore)
+        {
+            localStorage.setItem('hscore', punkty);
+        }
+        window.location.href = 'lost.html?score=' + punkty + '&deathType=' + deathType;
     }
 });
