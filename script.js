@@ -1,10 +1,16 @@
 document.addEventListener('DOMContentLoaded', function() {
+    const storageData=
+    {
+        "hscore": localStorage.getItem('hscore') || 0,
+        "tickspeed": localStorage.getItem('tickspeed') || 200
+    }
     let area = Array.from({ length: 20 }, () => new Array(20).fill(0));
     let direction = 'w';
     let glowa = { x: 10, y: 10 };
     let snake = [];
     let lastDirection = 'w';
     let punkty = 0;
+    let isPaused = true;
     const punktyCounter = document.getElementById('score');
     /*
     0 - puste
@@ -15,7 +21,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const canvas = document.getElementById('snakeArea');
     const draw = canvas.getContext('2d');
     draw.rect(0,0,1,1);
-    drawArea();
     spawnApple();
     initWasz(glowa.x, glowa.y);
     const appleEffect = new Audio('assets/apple.mp3');
@@ -23,6 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const audio = new Audio('assets/8-Bit_Katyusha.mp3');
     audio.volume = 0.4;
     audio.loop = true;
+    drawArea();
     const startAudio = () => {
         audio.play().catch(() => {});
         window.removeEventListener('pointerdown', startAudio);
@@ -72,6 +78,9 @@ document.addEventListener('DOMContentLoaded', function() {
         else if(event.key === 'd') {
             direction=('d');
         }
+        else if(event.key === 'p') {
+            tooglePause();
+        }
     });
 
     // Inicjalizacja węszaa na planszy
@@ -98,6 +107,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     //Pętla gry
     setInterval(function() {
+        mainTick();
+    }, 200);
+    function mainTick()
+    {
+        if(isPaused){return;}
         try {
             // Oblicz nowe położenie głowy
             let nextHeadX = glowa.x;
@@ -157,8 +171,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Nie najlepszy sposób na wykrycie wyjścia poza zakres tablicy, ale ify mi nie chciały działać
             window.location.href = 'lost.html';
         }
-    }, 200);
-
+    }
     //Spawnowanie jabłka
     function spawnApple()
     {
@@ -174,5 +187,19 @@ document.addEventListener('DOMContentLoaded', function() {
             spawnApple();
         }
         
+    }
+    //Pauza
+    const pauseText = document.getElementById('pause-text');
+    function tooglePause()
+    {
+        pauseText.textContent = 'Wąsz jest zatrzymany, wciśnij P aby przejąć sterowanie węsza'
+        isPaused = !isPaused;
+        if (isPaused) {
+            pauseText.style.display = 'block';
+            canvas.style.opacity = '0.5';
+        } else {
+            pauseText.style.display = 'none';
+            canvas.style.opacity = '1';
+        }
     }
 });

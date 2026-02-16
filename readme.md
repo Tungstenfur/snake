@@ -1,5 +1,7 @@
 # Wąsz the game
-
+## Sterowanie
+ - WASD - ruch węsza
+ - P - pauza, rozpoczęcie gry
 ## Uznanie praw autorskie
  - Główna ścieżka dźwiękowa autorstwa [Synth-1A](https://www.youtube.com/channel/UCnZVxzmY7-Qw12AuAQUModw)
  - Wczytywanie kasety: [Automatic tapedeck rewind, fastforward, play](https://freesound.org/people/stecman/sounds/376058/?) autorstwa stecman na licencji CC0
