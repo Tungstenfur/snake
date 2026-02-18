@@ -2,7 +2,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const storageData=
     {
         "hscore": localStorage.getItem('hscore') || 0,
-        "tickspeed": localStorage.getItem('tickspeed') || 200
+        "tickspeed": localStorage.getItem('tickspeed') || 200,
+        "apples": localStorage.getItem('apples') || 1,
     }
     let area = Array.from({ length: 20 }, () => new Array(20).fill(0));
     let direction = 'w';
@@ -10,6 +11,10 @@ document.addEventListener('DOMContentLoaded', function() {
     let snake = [];
     let lastDirection = 'w';
     let punkty = 0;
+    const speedForm = document.getElementById('speed');
+    const applesForm = document.getElementById('apples'); 
+    speedForm.value = storageData.tickspeed;
+    applesForm.value = storageData.apples;
     let isPaused = true;
     const punktyCounter = document.getElementById('score');
     /*
@@ -21,7 +26,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const canvas = document.getElementById('snakeArea');
     const draw = canvas.getContext('2d');
     draw.rect(0,0,1,1);
-    spawnApple();
+    for(let i = 0; i < storageData.apples; i++)
+    {
+        spawnApple();
+    }
     initWasz(glowa.x, glowa.y);
     const appleEffect = new Audio('assets/apple.mp3');
     appleEffect.volume = 0.8;
@@ -29,16 +37,30 @@ document.addEventListener('DOMContentLoaded', function() {
     audio.volume = 0.4;
     audio.loop = true;
     drawArea();
-    const startAudio = () => {
-        audio.play().catch(() => {});
-        window.removeEventListener('pointerdown', startAudio);
-        window.removeEventListener('keydown', startAudio);
-        window.removeEventListener('touchstart', startAudio);
-    };
-    window.addEventListener('pointerdown', startAudio);
-    window.addEventListener('keydown', startAudio);
-    window.addEventListener('touchstart', startAudio);
+    try{
+        audio.play()
+    }
+    catch{
+        const startAudio = () => {
+            audio.play().catch(() => {});
+            window.removeEventListener('pointerdown', startAudio);
+            window.removeEventListener('keydown', startAudio);
+            window.removeEventListener('touchstart', startAudio);
+        };
+        window.addEventListener('pointerdown', startAudio);
+        window.addEventListener('keydown', startAudio);
+        window.addEventListener('touchstart', startAudio);
+    }   
     //Rysowanie planszy
+    document.getElementById('config-form').addEventListener('submit', function(event) 
+    {
+        event.preventDefault();
+        storageData.tickspeed = speedForm.value;
+        storageData.apples = applesForm.value;
+        localStorage.setItem('tickspeed', storageData.tickspeed);
+        localStorage.setItem('apples', storageData.apples);
+        window.location.reload();
+    });
     function drawArea()
     {
         for(let i = 0; i < area.length; i++)
@@ -108,7 +130,7 @@ document.addEventListener('DOMContentLoaded', function() {
     //Pętla gry
     setInterval(function() {
         mainTick();
-    }, 200);
+    }, storageData.tickspeed);
     function mainTick()
     {
         if(isPaused){return;}
@@ -198,6 +220,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function tooglePause()
     {
         pauseText.textContent = 'Wąsz jest zatrzymany, wciśnij P aby przejąć sterowanie węsza'
+        document.getElementById('config-form').style.display = 'none';
         isPaused = !isPaused;
         if (isPaused) {
             pauseText.style.display = 'block';

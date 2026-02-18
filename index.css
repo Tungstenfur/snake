@@ -3,14 +3,17 @@
     font-style: normal;
     font-weight: normal;
     src: url('assets/VT323-Regular.woff');
-    }
+}
+*{
+    font-family: 'VT323', monospace;
+}
 body{
     margin: 0;
     padding: 0;
-    font-family: 'VT323', monospace;
+
     transform: perspective(1000px) scale(1.02);
     padding: 2%;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 html::before {
     content: "";
@@ -101,6 +104,32 @@ html
     animation-name: textflicker;
     animation-iteration-count: infinite;
     animation-direction: alternate;
+}
+form *{
+    text-align: center;
+}
+form label{
+    display: block;
+    font-size: 1em;
+    margin-bottom: 0.5em;
+}
+form input{
+    width: 100%;
+    font-size: 1.5em;
+}
+form button{
+    background-color: #8b8;
+    color: #051005;
+    border: none;
+    width: 100%;
+    padding: 0.2em;
+    font-size: 1.5em;
+    margin-top: 1em;
+}
+input{
+    background-color: #ffffff22;
+    color: #8b8;
+    border: none;
 }
 @keyframes textflicker {
     from {

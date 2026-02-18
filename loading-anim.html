@@ -7,15 +7,20 @@
     <link rel="stylesheet" href="index.css">
     <script>
         let audio = new Audio('assets/casette.wav');
-        const startAudio = () => {
-            audio.play().catch(() => {});
-            window.removeEventListener('pointerdown', startAudio);
-            window.removeEventListener('keydown', startAudio);
-            window.removeEventListener('touchstart', startAudio);
-        };
-        window.addEventListener('pointerdown', startAudio);
-        window.addEventListener('keydown', startAudio);
-        window.addEventListener('touchstart', startAudio);
+        try{
+        audio.play()
+        }
+        catch{
+            const startAudio = () => {
+                audio.play().catch(() => {});
+                window.removeEventListener('pointerdown', startAudio);
+                window.removeEventListener('keydown', startAudio);
+                window.removeEventListener('touchstart', startAudio);
+            };
+            window.addEventListener('pointerdown', startAudio);
+            window.addEventListener('keydown', startAudio);
+            window.addEventListener('touchstart', startAudio);
+        }   
         document.addEventListener('DOMContentLoaded', async () => {
             const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 

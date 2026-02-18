@@ -10,15 +10,20 @@
         audio= new Audio('assets/White_Army_Black_Baron_8-Bit.mp3');
         audio.volume = 0.15;
         audio.loop = true;
-        const startAudio = () => {
-            audio.play().catch(() => {});
-            window.removeEventListener('pointerdown', startAudio);
-            window.removeEventListener('keydown', startAudio);
-            window.removeEventListener('touchstart', startAudio);
-        };
-        window.addEventListener('pointerdown', startAudio);
-        window.addEventListener('keydown', startAudio);
-        window.addEventListener('touchstart', startAudio);
+        try{
+        audio.play()
+        }
+        catch{
+            const startAudio = () => {
+                audio.play().catch(() => {});
+                window.removeEventListener('pointerdown', startAudio);
+                window.removeEventListener('keydown', startAudio);
+                window.removeEventListener('touchstart', startAudio);
+            };
+            window.addEventListener('pointerdown', startAudio);
+            window.addEventListener('keydown', startAudio);
+            window.addEventListener('touchstart', startAudio);
+        }
     </script>
 </head>
 <body>

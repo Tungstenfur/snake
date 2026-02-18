@@ -19,6 +19,14 @@
             </canvas>
         </div>
         <h2 id="pause-text">Oczekiwanie na operatora węsza, wciśnij P aby rozpocząć</h2>
+        <form id="config-form">
+            <h3 class="config">WĄSZ.CONFIG</h3>
+            <label for="speed">WĄSZ.TICKSPEED =</label>
+            <input type="number" id="speed" name="speed" min="50" max="500" class="config"><br>
+            <label for="apples">WĄSZ.APPLES =</label>
+            <input type="number" id="apples" name="apples" min="1" max="5" class="config"><br>
+            <button type="submit" id="zastosuj">Zastosuj</button>
+        </form>
     </div>
 </body>
 </html>
