@@ -139,3 +139,16 @@ input{
       text-shadow: 2px 0.5px 2px #45ea3629, -1px -0.5px 2px #75fa69;
     }
 }
+::-webkit-scrollbar {
+    width: 0.5em;
+    background: linear-gradient(90deg, #051005, #051505);
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #052005;
+}
+::-webkit-scrollbar-track {
+    background: #051005;
+}
+::-webkit-scrollbar-thumb {
+    background: #051505;
+}
