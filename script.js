@@ -4,8 +4,10 @@ document.addEventListener('DOMContentLoaded', function() {
         "hscore": localStorage.getItem('hscore') || 0,
         "tickspeed": localStorage.getItem('tickspeed') || 200,
         "apples": localStorage.getItem('apples') || 1,
+        "areaSize": localStorage.getItem('areaSize') || 20
     }
-    let area = Array.from({ length: 20 }, () => new Array(20).fill(0));
+
+    let area = Array.from({ length: storageData.areaSize}, () => new Array(20).fill(0));
     let direction = 'w';
     let glowa = { x: 10, y: 10 };
     let snake = [];
@@ -24,6 +26,8 @@ document.addEventListener('DOMContentLoaded', function() {
     3+ - ciało węsza
     */
     const canvas = document.getElementById('snakeArea');
+    canvas.width = storageData.areaSize;
+    canvas.height = storageData.areaSize;
     const draw = canvas.getContext('2d');
     draw.rect(0,0,1,1);
     for(let i = 0; i < storageData.apples; i++)
@@ -202,7 +206,10 @@ document.addEventListener('DOMContentLoaded', function() {
     //Spawnowanie jabłka
     function spawnApple()
     {
+        if(area.flat().includes(0))
+        {
 
+        }
         let x = Math.floor(Math.random() * 20);
         let y = Math.floor(Math.random() * 20);
         if(area[x][y] === 0)
