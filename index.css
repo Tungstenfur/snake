@@ -141,14 +141,14 @@ input{
 }
 ::-webkit-scrollbar {
     width: 0.5em;
-    background: linear-gradient(90deg, #051005, #051505);
 }
 ::-webkit-scrollbar-thumb:hover {
     background: #052005;
 }
 ::-webkit-scrollbar-track {
-    background: #051005;
+    background: #051005 repeating-linear-gradient(to bottom,rgba(0,0,0,0.25) 0px,rgba(0,0,0,0.25) 1px,transparent 1px,transparent 3px);
 }
 ::-webkit-scrollbar-thumb {
-    background: #051505;
+    background: #051505 repeating-linear-gradient(to bottom,rgba(0,0,0,0.25) 0px,rgba(0,0,0,0.25) 1px,transparent 1px,transparent 3px);;
+    
 }
