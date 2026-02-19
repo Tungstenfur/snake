@@ -1,32 +1,48 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Wąsz the game</title>
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="index.css" />
     <script src="script.js" defer></script>
-</head>
-<body>
+  </head>
+  <body>
     <div class="flex">
-        <h1>Wąsz the game</h1>
-        <span>
-            <img src="assets/apple.png" alt="apples" id="apple">
-            <span id="score">0</span>
-        </span>
-        <div class="crt-wrap">
-            <canvas id="snakeArea" class="crt-canvas" width="20" height="20">
-            </canvas>
-        </div>
-        <h2 id="pause-text">Oczekiwanie na operatora węsza, wciśnij P aby rozpocząć</h2>
-        <form id="config-form">
-            <h3 class="config">WĄSZ.CONFIG</h3>
-            <label for="speed">WĄSZ.TICKSPEED =</label>
-            <input type="number" id="speed" name="speed" min="50" max="500" class="config"><br>
-            <label for="apples">WĄSZ.APPLES =</label>
-            <input type="number" id="apples" name="apples" min="1" max="5" class="config"><br>
-            <button type="submit" id="zastosuj">Zastosuj</button>
-        </form>
+      <h1>Wąsz the game</h1>
+      <span>
+        <img src="assets/apple.png" alt="apples" id="apple" />
+        <span id="score">0</span>
+      </span>
+      <div class="crt-wrap">
+        <canvas id="snakeArea" class="crt-canvas" width="20" height="20">
+        </canvas>
+      </div>
+      <h2 id="pause-text">
+        Oczekiwanie na operatora węsza, wciśnij P aby rozpocząć
+      </h2>
+      <form id="config-form">
+        <h3 class="config">WĄSZ.CONFIG</h3>
+        <label for="speed">WĄSZ.TICKSPEED =</label>
+        <input
+          type="number"
+          id="speed"
+          name="speed"
+          min="50"
+          max="500"
+          class="config"
+        /><br />
+        <label for="apples">WĄSZ.APPLES =</label>
+        <input
+          type="number"
+          id="apples"
+          name="apples"
+          min="1"
+          max="5"
+          class="config"
+        /><br />
+        <button type="submit" id="zastosuj">Zastosuj</button>
+      </form>
     </div>
-</body>
+  </body>
 </html>

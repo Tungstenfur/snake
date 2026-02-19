@@ -1,35 +1,40 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="index.css" />
     <script src="intro.js" defer></script>
-</head>
-<body>
+  </head>
+  <body>
     <h2 class="typing-text" data-typing>Wąsz eksplodował</h2>
-    <p class="typing-text" data-typing>Niestety, w czasie zbierania jabłek wąsz uderzył głową o coś i eksplodował. Na szczęście, nikt nie ucierpiał, ale wąsz został całkowicie zniszczony.</p>
+    <p class="typing-text" data-typing>
+      Niestety, w czasie zbierania jabłek wąsz uderzył głową o coś i
+      eksplodował. Na szczęście, nikt nie ucierpiał, ale wąsz został całkowicie
+      zniszczony.
+    </p>
     <p class="typing-text" data-typing>---POCZĄTEK RAPORTU---</p>
     <p class="typing-text" data-typing id="raport"></p>
     <script>
-        let raport=document.getElementById("raport");
-        let params = new URLSearchParams(window.location.search);
-        let score = params.get("score");
-        let deathType = params.get("deathType");
-        if(deathType==='0')
-            deathType="zderzenie z samym sobą";
-        else if(deathType==='1')
-            deathType="zdzerzenie z ścianą"
-        const d = new Date();
-        if(d.getMinutes()<10)
-            {raport.textContent="Czas: "+d.getHours()+":0"+d.getMinutes()+'\n';}
-        else
-            {raport.textContent="Czas: "+d.getHours()+":"+d.getMinutes()+'\n';}
-        raport.textContent+="Zebrane jabłka: "+score+'\n'
-        raport.textContent+="Przyczyna śmierci: "+deathType;
+      let raport = document.getElementById("raport");
+      let params = new URLSearchParams(window.location.search);
+      let score = params.get("score");
+      let deathType = params.get("deathType");
+      if (deathType === "0") deathType = "zderzenie z samym sobą";
+      else if (deathType === "1") deathType = "zdzerzenie z ścianą";
+      const d = new Date();
+      if (d.getMinutes() < 10) {
+        raport.textContent =
+          "Czas: " + d.getHours() + ":0" + d.getMinutes() + "\n";
+      } else {
+        raport.textContent =
+          "Czas: " + d.getHours() + ":" + d.getMinutes() + "\n";
+      }
+      raport.textContent += "Zebrane jabłka: " + score + "\n";
+      raport.textContent += "Przyczyna śmierci: " + deathType;
     </script>
     <p class="typing-text" data-typing>---KONIEC RAPORTU---</p>
     <a href="game.html">>ZAGRAJ PONOWNIE</a>
-</body>
+  </body>
 </html>

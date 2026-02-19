@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,12 +8,12 @@
     <link rel="stylesheet" href="index.css">
     <script>
         let audio = new Audio('assets/casette.wav');
-        try{
-        audio.play()
+        try {
+            audio.play()
         }
-        catch{
+        catch {
             const startAudio = () => {
-                audio.play().catch(() => {});
+                audio.play().catch(() => { });
                 window.removeEventListener('pointerdown', startAudio);
                 window.removeEventListener('keydown', startAudio);
                 window.removeEventListener('touchstart', startAudio);
@@ -20,7 +21,7 @@
             window.addEventListener('pointerdown', startAudio);
             window.addEventListener('keydown', startAudio);
             window.addEventListener('touchstart', startAudio);
-        }   
+        }
         document.addEventListener('DOMContentLoaded', async () => {
             const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -31,7 +32,7 @@
             }
 
             const showLineElement = async (element) => {
-                await sleep(Math.random() * 800+200);
+                await sleep(Math.random() * 800 + 200);
                 element.classList.add('is-visible');
             };
 
@@ -44,6 +45,7 @@
     </script>
     </script>
 </head>
+
 <body>
     <p data-line-typing>READING ROM</p>
     <p data-line-typing>SYSINIT.SYS</p>
@@ -63,4 +65,5 @@
     <p data-line-typing>SUCCES</p>
     <p data-line-typing>RUNNING WASZ.SYS</p>
 </body>
+
 </html>
