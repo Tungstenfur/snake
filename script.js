@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let normalizedValue = Math.floor(Math.min(max, Math.max(min, parsedValue)));
     return normalizedValue;
   }
+  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
   const storageData = {
     hscore: parseConfigNumber(localStorage.getItem("hscore"), 0, 0, 999999),
     tickspeed: parseConfigNumber(
@@ -15,9 +16,9 @@ document.addEventListener("DOMContentLoaded", function () {
       50,
       500,
     ),
-    apples: parseConfigNumber(localStorage.getItem("apples"), 1, 1, 5, true),
+    apples: parseConfigNumber(localStorage.getItem("apples"), 1, 1, 5),
     areaSize: parseConfigNumber(localStorage.getItem("areaSize"), 20, 10, 30),
-    increment: parseConfigNumber(localStorage.getItem("increment"), 0.1, 0, 2),
+    increment: parseConfigNumber(localStorage.getItem("increment"), 0.1, 0, 10),
     minspeed: parseConfigNumber(localStorage.getItem("minspeed"), 50, 25, 500),
   };
   let area = Array.from({ length: storageData.areaSize }, () =>
@@ -83,29 +84,16 @@ document.addEventListener("DOMContentLoaded", function () {
     .getElementById("config-form")
     .addEventListener("submit", function (event) {
       event.preventDefault();
-      storageData.tickspeed = parseConfigNumber(
-        speedForm.value,
-        200,
-        50,
-        500,
-        true,
-      );
-      storageData.apples = parseConfigNumber(applesForm.value, 1, 1, 5, true);
-      storageData.areaSize = parseConfigNumber(
-        areaSizeForm.value,
-        20,
+      storageData.tickspeed = parseConfigNumber(speedForm.value, 200, 50, 500);
+      storageData.apples = parseConfigNumber(applesForm.value, 1, 1, 5);
+      storageData.areaSize = parseConfigNumber(areaSizeForm.value, 20, 10, 30);
+      storageData.increment = parseConfigNumber(
+        incrementForm.value,
+        0.1,
+        0,
         10,
-        30,
-        true,
       );
-      storageData.increment = parseConfigNumber(incrementForm.value, 0.1, 0, 2);
-      storageData.minspeed = parseConfigNumber(
-        minspeedForm.value,
-        50,
-        25,
-        500,
-        true,
-      );
+      storageData.minspeed = parseConfigNumber(minspeedForm.value, 50, 25, 500);
       localStorage.setItem("tickspeed", storageData.tickspeed);
       localStorage.setItem("apples", storageData.apples);
       localStorage.setItem("areaSize", storageData.areaSize);
@@ -118,7 +106,7 @@ document.addEventListener("DOMContentLoaded", function () {
       for (let j = 0; j < area[i].length; j++) {
         switch (area[i][j]) {
           case 0:
-            draw.fillStyle = "#08110b";
+            draw.fillStyle = "#08270b";
             break;
           case 1:
             draw.fillStyle = "#d6ffbf";
@@ -172,11 +160,12 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   //Pętla gry
-  setInterval(function () {
-    mainTick();
-  }, storageData.tickspeed);
-  function mainTick() {
+
+  mainTick();
+  async function mainTick() {
     if (isPaused) {
+      await sleep(100);
+      mainTick();
       return;
     }
     try {
@@ -230,6 +219,10 @@ document.addEventListener("DOMContentLoaded", function () {
       if (ateFood) {
         punkty++;
         punktyCounter.textContent = punkty;
+        storageData.tickspeed = Math.max(
+          storageData.minspeed,
+          storageData.tickspeed - storageData.increment,
+        );
         spawnApple();
         appleEffect.play();
       }
@@ -246,6 +239,8 @@ document.addEventListener("DOMContentLoaded", function () {
       // Nie najlepszy sposób na wykrycie wyjścia poza zakres tablicy, ale ify mi nie chciały działać
       killWasz(1);
     }
+    await sleep(storageData.tickspeed);
+    mainTick();
   }
   //Spawnowanie jabłka
   function spawnApple() {
