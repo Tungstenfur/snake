@@ -8,8 +8,8 @@
     <script src="intro.js" defer></script>
   </head>
   <body>
-    <h2 class="typing-text" data-typing>Wąsz eksplodował</h2>
-    <p class="typing-text" data-typing>
+    <h2 class="typing-text" data-typing id="explode">Wąsz eksplodował</h2>
+    <p class="typing-text" data-typing id="explanation">
       Niestety, w czasie zbierania jabłek wąsz uderzył głową o coś i
       eksplodował. Na szczęście, nikt nie ucierpiał, ale wąsz został całkowicie
       zniszczony.
@@ -23,6 +23,12 @@
       let deathType = params.get("deathType");
       if (deathType === "0") deathType = "zderzenie z samym sobą";
       else if (deathType === "1") deathType = "zdzerzenie z ścianą";
+      else if (deathType === "2") {
+        document.getElementById("explode").textContent = "Sukces!";
+        document.getElementById("explanation").textContent =
+          "Wąsz osiągnął maksymalny wynik! Wąsz osiągnął pełną polimeryzacje i zostanie teraz pocięty na bloki do budowy domów. Gratulacje!";
+        deathType = "pełna polimeryzacja";
+      }
       const d = new Date();
       if (d.getMinutes() < 10) {
         raport.textContent =
