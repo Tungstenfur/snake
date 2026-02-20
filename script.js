@@ -1,23 +1,47 @@
 document.addEventListener("DOMContentLoaded", function () {
+  function parseConfigNumber(rawValue, fallback, min, max) {
+    const parsedValue = Number(rawValue);
+    if (!Number.isFinite(parsedValue)) {
+      return fallback;
+    }
+    let normalizedValue = Math.floor(Math.min(max, Math.max(min, parsedValue)));
+    return normalizedValue;
+  }
   const storageData = {
-    hscore: localStorage.getItem("hscore") || 0,
-    tickspeed: localStorage.getItem("tickspeed") || 200,
-    apples: localStorage.getItem("apples") || 1,
-    areaSize: localStorage.getItem("areaSize") || 20,
+    hscore: parseConfigNumber(localStorage.getItem("hscore"), 0, 0, 999999),
+    tickspeed: parseConfigNumber(
+      localStorage.getItem("tickspeed"),
+      200,
+      50,
+      500,
+    ),
+    apples: parseConfigNumber(localStorage.getItem("apples"), 1, 1, 5, true),
+    areaSize: parseConfigNumber(localStorage.getItem("areaSize"), 20, 10, 30),
+    increment: parseConfigNumber(localStorage.getItem("increment"), 0.1, 0, 2),
+    minspeed: parseConfigNumber(localStorage.getItem("minspeed"), 50, 25, 500),
   };
-
   let area = Array.from({ length: storageData.areaSize }, () =>
-    new Array(20).fill(0),
+    new Array(storageData.areaSize).fill(0),
   );
   let direction = "w";
-  let glowa = { x: 10, y: 10 };
+  let glowa = {
+    x: Math.floor(area.length / 2),
+    y: Math.floor(area.length / 2),
+  };
   let snake = [];
   let lastDirection = "w";
   let punkty = 0;
   const speedForm = document.getElementById("speed");
   const applesForm = document.getElementById("apples");
+  const areaSizeForm = document.getElementById("areaSize");
+  const incrementForm = document.getElementById("increment");
+  const minspeedForm = document.getElementById("minspeed");
+
   speedForm.value = storageData.tickspeed;
   applesForm.value = storageData.apples;
+  areaSizeForm.value = storageData.areaSize;
+  incrementForm.value = storageData.increment;
+  minspeedForm.value = storageData.minspeed;
   let isPaused = true;
   const punktyCounter = document.getElementById("score");
   /*
@@ -59,10 +83,34 @@ document.addEventListener("DOMContentLoaded", function () {
     .getElementById("config-form")
     .addEventListener("submit", function (event) {
       event.preventDefault();
-      storageData.tickspeed = speedForm.value;
-      storageData.apples = applesForm.value;
+      storageData.tickspeed = parseConfigNumber(
+        speedForm.value,
+        200,
+        50,
+        500,
+        true,
+      );
+      storageData.apples = parseConfigNumber(applesForm.value, 1, 1, 5, true);
+      storageData.areaSize = parseConfigNumber(
+        areaSizeForm.value,
+        20,
+        10,
+        30,
+        true,
+      );
+      storageData.increment = parseConfigNumber(incrementForm.value, 0.1, 0, 2);
+      storageData.minspeed = parseConfigNumber(
+        minspeedForm.value,
+        50,
+        25,
+        500,
+        true,
+      );
       localStorage.setItem("tickspeed", storageData.tickspeed);
       localStorage.setItem("apples", storageData.apples);
+      localStorage.setItem("areaSize", storageData.areaSize);
+      localStorage.setItem("increment", storageData.increment);
+      localStorage.setItem("minspeed", storageData.minspeed);
       window.location.reload();
     });
   function drawArea() {
@@ -201,10 +249,12 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   //Spawnowanie jabłka
   function spawnApple() {
-    if (area.flat().includes(0)) {
+    if (!area.flat().includes(0)) {
+      killWasz(2);
+      return;
     }
-    let x = Math.floor(Math.random() * 20);
-    let y = Math.floor(Math.random() * 20);
+    let x = Math.floor(Math.random() * area.length);
+    let y = Math.floor(Math.random() * area.length);
     if (area[x][y] === 0) {
       area[x][y] = 1;
     } else {
