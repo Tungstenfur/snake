@@ -11,8 +11,22 @@
     <div class="flex">
       <h1>Wąsz the game</h1>
       <span>
-        <img src="assets/apple.png" alt="apples" id="apple" />
-        <span id="score">0</span>
+        <img
+          src="assets/apple.png"
+          alt="Jabłka"
+          class="icon"
+          style="filter: saturate(160%) brightness(210%)"
+        />
+        <span id="score" class="score">0</span>
+      </span>
+      <span>
+        <img
+          src="assets/hscore.png"
+          alt="Najwyższy wynik"
+          class="icon"
+          style="filter: contrast(120%)"
+        />
+        <span id="hscore" class="score">0</span>
       </span>
       <div class="crt-wrap">
         <canvas id="snakeArea" class="crt-canvas" width="20" height="20">
@@ -57,7 +71,6 @@
           name="increment"
           min="0"
           max="10"
-          step="0.25"
           class="config"
         /><br />
         <label for="minspeed">SPEED.MIN =</label>

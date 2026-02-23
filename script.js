@@ -37,7 +37,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const areaSizeForm = document.getElementById("areaSize");
   const incrementForm = document.getElementById("increment");
   const minspeedForm = document.getElementById("minspeed");
-
   speedForm.value = storageData.tickspeed;
   applesForm.value = storageData.apples;
   areaSizeForm.value = storageData.areaSize;
@@ -45,6 +44,8 @@ document.addEventListener("DOMContentLoaded", function () {
   minspeedForm.value = storageData.minspeed;
   let isPaused = true;
   const punktyCounter = document.getElementById("score");
+  const hscoreLabel = document.getElementById("hscore");
+  hscoreLabel.textContent = storageData.hscore;
   /*
     0 - puste
     1 - jabko 
@@ -152,7 +153,7 @@ document.addEventListener("DOMContentLoaded", function () {
     snake.unshift({ x: nextHeadX, y: nextHeadY });
     area[nextHeadX][nextHeadY] = 2;
 
-    // Jeśli wąż nie zjadł jedzenia, obetnij mu ogon, troche brutalne ale działa
+    // Jeśli wąż nie zjadł jedzenia, obetnij mu ogon, brutalne ale działa
     if (!ateFood) {
       const tail = snake.pop();
       area[tail.x][tail.y] = 0;
@@ -236,10 +237,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
       drawArea();
     } catch (error) {
-      // Nie najlepszy sposób na wykrycie wyjścia poza zakres tablicy, ale ify mi nie chciały działać
+      //wykrycie wyjścia poza zakres tablicy
       killWasz(1);
     }
     await sleep(storageData.tickspeed);
+    //console.log(storageData.tickspeed);
     mainTick();
   }
   //Spawnowanie jabłka

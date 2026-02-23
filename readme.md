@@ -1,5 +1,13 @@
 # Wąsz the game
 
+## Lista rozszerzeń
+
+- Poziomy trudności (dostosowanie prędkości węsza, ilości jabłek, przyrostu prędkości w menu konfiguracji)
+- Pauza (P) + overlay „PAUZA”.
+- Animacje / efekty
+- Konfiguracja planszy
+- Dźwięki
+
 ## Sterowanie
 
 - WASD - ruch węsza

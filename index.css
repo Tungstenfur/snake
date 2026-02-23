@@ -56,12 +56,11 @@ html::after {
   flex-direction: column;
   min-height: 100vh;
 }
-#apple {
+.icon {
   width: 2em;
   height: 2em;
-  filter: saturate(200%);
 }
-#score {
+.score {
   font-size: 3em;
   color: #8b8;
 }
