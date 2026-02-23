@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("keydown", startAudio);
   window.addEventListener("touchstart", startAudio);
   const elements = Array.from(document.querySelectorAll("[data-typing]"));
-
+  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
   const fullTexts = elements.map((element) => element.textContent.trim());
 
   for (const element of elements) {
@@ -41,7 +41,13 @@ document.addEventListener("DOMContentLoaded", () => {
   (async () => {
     for (let index = 0; index < elements.length; index++) {
       await typeElement(elements[index], fullTexts[index]);
+      audio.pause();
+      await sleep(500);
+      audio.play();
     }
+    window.removeEventListener("pointerdown", startAudio);
+    window.removeEventListener("keydown", startAudio);
+    window.removeEventListener("touchstart", startAudio);
     audio.pause();
   })();
 });
