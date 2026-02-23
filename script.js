@@ -66,20 +66,25 @@ document.addEventListener("DOMContentLoaded", function () {
   const audio = new Audio("assets/8-Bit_Katyusha.mp3");
   audio.volume = 0.4;
   audio.loop = true;
+  const removeAudioListeners = () => {
+    window.removeEventListener("pointerdown", startAudio);
+    window.removeEventListener("keydown", startAudio);
+    window.removeEventListener("touchstart", startAudio);
+  };
+  const startAudio = () => {
+    audio
+      .play()
+      .then(() => {
+        removeAudioListeners();
+      })
+      .catch(() => {});
+  };
   drawArea();
-  try {
-    audio.play();
-  } catch {
-    const startAudio = () => {
-      audio.play().catch(() => {});
-      window.removeEventListener("pointerdown", startAudio);
-      window.removeEventListener("keydown", startAudio);
-      window.removeEventListener("touchstart", startAudio);
-    };
+  audio.play().catch(() => {
     window.addEventListener("pointerdown", startAudio);
     window.addEventListener("keydown", startAudio);
     window.addEventListener("touchstart", startAudio);
-  }
+  });
   //Rysowanie planszy
   document
     .getElementById("config-form")

@@ -8,21 +8,26 @@
     <script src="intro.js" defer></script>
     <script>
       audio = new Audio("assets/White_Army_Black_Baron_8-Bit.mp3");
-      audio.volume = 0.15;
+      audio.volume = 0.25;
       audio.loop = true;
-      try {
-        audio.play();
-      } catch {
-        const startAudio = () => {
-          audio.play().catch(() => {});
-          window.removeEventListener("pointerdown", startAudio);
-          window.removeEventListener("keydown", startAudio);
-          window.removeEventListener("touchstart", startAudio);
-        };
+      const removeAudioListeners = () => {
+        window.removeEventListener("pointerdown", startAudio);
+        window.removeEventListener("keydown", startAudio);
+        window.removeEventListener("touchstart", startAudio);
+      };
+      const startAudio = () => {
+        audio
+          .play()
+          .then(() => {
+            removeAudioListeners();
+          })
+          .catch(() => {});
+      };
+      audio.play().catch(() => {
         window.addEventListener("pointerdown", startAudio);
         window.addEventListener("keydown", startAudio);
         window.addEventListener("touchstart", startAudio);
-      }
+      });
     </script>
   </head>
   <body>
@@ -30,10 +35,10 @@
     <p class="typing-text" data-typing>Kreml, rok 1982</p>
     <p class="typing-text" data-typing>
       Sekretarz generalny komitetu centralnego KPZR Leonid Breżniew zleca
-      naukowcom z ośródków badawczych z całego kraju stworzenie nowego taniego
-      materiału, który mógłby być używany do budowy wszystkiego, od domów po
-      statki kosmiczne. Przez następna lata naukowcy pracują nad stworzeniem
-      tego materiału, ale bez większych postępów.
+      naukowcom z ośródków badawczych na terenie całego kraju stworzenie nowego
+      taniego materiału, który mógłby być używany do budowy wszystkiego, od
+      domów po statki kosmiczne. Przez następna lata naukowcy pracują nad
+      stworzeniem tego materiału, ale bez większych postępów.
     </p>
     <h3 class="typing-text" data-typing>Związek radziecki, Petersburg</h3>
     <p class="typing-text" data-typing>

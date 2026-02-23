@@ -39,6 +39,33 @@
       }
       raport.textContent += "Zebrane jabłka: " + score + "\n";
       raport.textContent += "Przyczyna śmierci: " + deathType;
+      document.addEventListener("DOMContentLoaded", function () {
+        let audio;
+        if (deathType === "pełna polimeryzacja") {
+          audio = new Audio("assets/Soviet_Anthem_8-bit.mp3");
+        } else {
+          audio = new Audio("assets/Varshavianka_8-Bit.mp3");
+        }
+        audio.volume = 0.3;
+        const removeAudioListeners = () => {
+          window.removeEventListener("pointerdown", startAudio);
+          window.removeEventListener("keydown", startAudio);
+          window.removeEventListener("touchstart", startAudio);
+        };
+        const startAudio = () => {
+          audio
+            .play()
+            .then(() => {
+              removeAudioListeners();
+            })
+            .catch(() => {});
+        };
+        audio.play().catch(() => {
+          window.addEventListener("pointerdown", startAudio);
+          window.addEventListener("keydown", startAudio);
+          window.addEventListener("touchstart", startAudio);
+        });
+      });
     </script>
     <p class="typing-text" data-typing>---KONIEC RAPORTU---</p>
     <a href="game.html">>ZAGRAJ PONOWNIE</a>
