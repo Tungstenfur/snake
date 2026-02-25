@@ -12,6 +12,7 @@
 
 - WASD - ruch węsza
 - P - pauza, rozpoczęcie gry
+- Enter - pomiń napisy
 
 ## Uznanie praw autorskie
 

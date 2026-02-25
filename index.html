@@ -28,6 +28,11 @@
         window.addEventListener("keydown", startAudio);
         window.addEventListener("touchstart", startAudio);
       });
+      window.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+          window.location.href = "loading-anim.html";
+        }
+      });
     </script>
   </head>
   <body>
