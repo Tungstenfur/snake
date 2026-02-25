@@ -19,7 +19,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Build
-        run: npm run build --publish=never
+        run: npm run build -- --publish=never
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
