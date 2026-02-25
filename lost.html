@@ -81,6 +81,14 @@
           '<p class="typing-text" data-typing id="piesekTekst" class="piesek">W nagrodę otrzymujesz pieska</p><img src="assets/won.jpg" id="piesek" class="piesek" /><br>';
       }
     </script>
-    <a href="game.html">>ZAGRAJ PONOWNIE</a>
+    <a href="game.html">>ZAGRAJ PONOWNIE</a><br />
+    <a href="#" id="quit">>WYJDŹ</a>
+    <script>
+      document.getElementById("quit").addEventListener("click", function (e) {
+        e.preventDefault();
+        window.close();
+        window.open("about:blank");
+      });
+    </script>
   </body>
 </html>

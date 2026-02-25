@@ -1,0 +1,23 @@
+{
+  "name": "wasz",
+  "version": "1.0.0",
+  "description": "snake tylko ze wasz",
+  "homepage": "https://github.com/Tungstenfur/snake#readme",
+  "bugs": {
+    "url": "https://github.com/Tungstenfur/snake/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tungstenfur/snake.git"
+  },
+  "license": "UNLICENSED",
+  "author": "koszutowski",
+  "type": "commonjs",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "dependencies": {
+    "electron": "^40.6.1"
+  }
+}
