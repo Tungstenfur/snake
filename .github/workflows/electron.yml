@@ -17,7 +17,7 @@ jobs:
         with:
           node-version: 25
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --include=dev
       - name: Build
         run: npm run build -- --publish=never
       - name: Upload artifacts
