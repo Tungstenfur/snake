@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="index.css" />
     <script src="intro.js" defer></script>
   </head>
-  <body>
+  <body id="body">
     <h2 class="typing-text" data-typing id="explode">Wąsz eksplodował</h2>
     <p class="typing-text" data-typing id="explanation">
       Niestety, w czasie zbierania jabłek wąsz uderzył głową o coś i
@@ -17,6 +17,7 @@
     <p class="typing-text" data-typing>---POCZĄTEK RAPORTU---</p>
     <p class="typing-text" data-typing id="raport"></p>
     <script>
+      let pieski = localStorage.getItem("pieski") || 0;
       let raport = document.getElementById("raport");
       let params = new URLSearchParams(window.location.search);
       let score = params.get("score");
@@ -24,6 +25,8 @@
       if (deathType === "0") deathType = "zderzenie z samym sobą";
       else if (deathType === "1") deathType = "zdzerzenie z ścianą";
       else if (deathType === "2") {
+        pieski++;
+        localStorage.setItem("pieski", pieski);
         document.getElementById("explode").textContent = "Sukces!";
         document.getElementById("explanation").textContent =
           "Wąsz osiągnął maksymalny wynik! Wąsz osiągnął pełną polimeryzacje i zostanie teraz pocięty na bloki do budowy domów. Gratulacje!";
@@ -39,6 +42,9 @@
       }
       raport.textContent += "Zebrane jabłka: " + score + "\n";
       raport.textContent += "Przyczyna śmierci: " + deathType;
+      if (pieski > 0) {
+        raport.textContent += "\nPieski: " + pieski;
+      }
       document.addEventListener("DOMContentLoaded", function () {
         let audio;
         if (deathType === "pełna polimeryzacja") {
@@ -68,6 +74,13 @@
       });
     </script>
     <p class="typing-text" data-typing>---KONIEC RAPORTU---</p>
+    <script>
+      pieski = localStorage.getItem("pieski") || 0;
+      if (pieski > 0) {
+        document.getElementById("body").innerHTML +=
+          '<p class="typing-text" data-typing id="piesekTekst" class="piesek">W nagrodę otrzymujesz pieska</p><img src="assets/won.jpg" id="piesek" class="piesek" /><br>';
+      }
+    </script>
     <a href="game.html">>ZAGRAJ PONOWNIE</a>
   </body>
 </html>
