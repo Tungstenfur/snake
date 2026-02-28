@@ -61,9 +61,9 @@ document.addEventListener("DOMContentLoaded", function () {
     spawnApple();
   }
   initWasz(glowa.x, glowa.y);
-  const appleEffect = new Audio("assets/apple.mp3");
+  const appleEffect = new Audio("assets/apple.opus");
   appleEffect.volume = 0.8;
-  const audio = new Audio("assets/8-Bit_Katyusha.mp3");
+  const audio = new Audio("assets/8-Bit_Katyusha.opus");
   audio.volume = 0.4;
   audio.loop = true;
   const removeAudioListeners = () => {
