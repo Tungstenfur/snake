@@ -112,6 +112,7 @@ html {
   animation-name: textflicker;
   animation-iteration-count: infinite;
   animation-direction: alternate;
+  user-select: none;
 }
 form * {
   text-align: center;

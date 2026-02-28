@@ -1,6 +1,6 @@
 {
   "name": "wasz",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "snake tylko ze wasz",
   "homepage": "https://github.com/Tungstenfur/snake#readme",
   "bugs": {
@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/Tungstenfur/snake.git"
   },
-  "license": "UNLICENSED",
+  "license": "MIT",
   "author": {
     "name": "Tungsten",
     "email": "koszutowski.bartek@gmail.com"
@@ -26,8 +26,7 @@
     "asar": true,
     "linux": {
       "target": [
-        "AppImage",
-        "deb"
+        "AppImage"
       ],
       "category": "Game"
     },
