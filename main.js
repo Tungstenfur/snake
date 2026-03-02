@@ -6,7 +6,6 @@ function createWindow() {
     autoHideMenuBar: true,
     fullscreen: true,
     webPreferences: {
-      contextIsolation: true,
       autoplayPolicy: "no-user-gesture-required",
     },
   });
